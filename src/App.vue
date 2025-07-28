@@ -1,64 +1,68 @@
 <script setup>
 import { ref } from 'vue'
 
-const message = ref('這是一串訊息')
+const text = '這是一段文字' //原始型別
 
-const number1 = ref(1)
+const text2 = ref('還是一段文字') //物件型別
 
-const number2 = ref('2')
+let num0 = 0
 
-const checkboxArray = ref([])
+let num = ref(0)
 
-const singleRadio = ref([])
+let num1 = '1'
+
+let num2 = ref('2')
+
+setInterval(()=>{
+  num.value++
+},500)
+
+const htmlTemplate = '<html><head><title>OXXO.STUDIO</title></head><body><p>我是內容</p></body></html>'
 
 </script>
 
 <template>
   <div>
-    <input type="text" v-model="message">
-    {{ message }}
+     {{ text }}
+     {{ typeof text}}
+     <hr>
+     {{ text2 }}
+     {{ typeof text2 }}
+     <hr>
+     {{ num0 }}
+     {{ typeof num0 }}
+     <hr>
+     <p>這個數值目前是:{{ num }}</p>
+     {{ typeof num }}
+     <h1 v-text="num"></h1>
+     <hr>
+     {{ num1 }}
+     {{ typeof num1 }}
     <hr>
-    <input type="text" v-model.lazy="message">
-    {{ message }}
+    {{ num2 }}
+    {{ typeof num2 }}
     <hr>
-    <input type="text" v-model.trim="message">
-    {{ message }}
-    <hr>
-    <input type="text" v-model.number="number1">
-    {{ number1 }}
-    {{ typeof number1 }}
-    <hr>
-    <input v-model="number1">
-    {{ number1 }}
-    {{ typeof number1 }}
-    <hr>
-    <input type="text" v-model="number2">
-    {{ number2 }}
-    {{ typeof number2 }}
-    <hr>
-    {{ checkboxArray }}
-    <div class="form-check">
-      <input type="checkbox" class="form-check-input" id="check1" v-model="checkboxArray" value="雞">
-      <label class="form-check-label" for="check1">雞</label>
-      <input type="checkbox" class="form-check-input" id="check2" v-model="checkboxArray" value="豬">
-      <label class="form-check-label" for="check2">豬</label>
-      <input type="checkbox" class="form-check-input" id="check3" v-model="checkboxArray" value="牛">
-      <label class="form-check-label" for="check3">牛</label>
-    </div>
-    <hr>
-    您選擇了:{{ singleRadio }}
-    <div class="form-check">
-      <input type="radio" class="form-check-input" id="radio1" v-model="singleRadio" value="雞">
-      <label class="form-check-label" for="radio1">雞</label>
-      <input type="radio" class="form-check-input" id="radio2" v-model="singleRadio" value="豬">
-      <label class="form-check-label" for="radio2">豬</label>
-      <input type="radio" class="form-check-input" id="radio3" v-model="singleRadio" value="牛">
-      <label class="form-check-label" for="radio3">牛</label>
-    </div>
+     <h1>雙花括號</h1>
+     {{ htmlTemplate }}
+     <hr>
+     <h1>v-text</h1>
+     <div v-text="htmlTemplate"></div>
+     <hr>
+     <h1>v-html</h1>
+     <div v-html="htmlTemplate"></div>
+     <p class="alert">XSS 手法之一，不要輕易使用!</p>
+     <input value="<script>alert('Hacked!')</script>">
 
   </div>
 </template>
 <style>
+
+.alert {
+  color:red;
+  font-weight: 900;
+  font-size: larger;
+
+}
 
 
 </style>
